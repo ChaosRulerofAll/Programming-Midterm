@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    [SerializeField] private float JumpStrength;
     [SerializeField] private float speed;
     private Vector2 _moveDir;
     
@@ -18,6 +19,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         transform.position += (Vector3) (speed * Time.deltaTime * _moveDir);
+
+        if (Input.GetKeyDown("space"))
+        {
+            rigidbody2D.AddForce(new Vector2(0, JumpStrength), ForceMode2D.Impulse);
+        }
     }
 
     public void SetMovementDirection(Vector2 newDirection) 

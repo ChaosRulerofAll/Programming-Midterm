@@ -1,12 +1,14 @@
 using UnityEngine;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private float JumpStrength;
+    [SerializeField] private Vector2 JumpStrength;
     [SerializeField] private float speed;
     private Vector2 _moveDir;
-    
+    private int points;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,15 +22,21 @@ public class Player : MonoBehaviour
     {
         transform.position += (Vector3) (speed * Time.deltaTime * _moveDir);
 
-        if (Input.GetKeyDown("space"))
-        {
-            rigidbody2D.AddForce(new Vector2(0, JumpStrength), ForceMode2D.Impulse);
-        }
     }
 
     public void SetMovementDirection(Vector2 newDirection) 
     {
         _moveDir = newDirection;
+    }
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.name == "Candy")
+        {
+            Destroy(coll.gameObject);
+
+            points += 1;
+        }
     }
 
 }

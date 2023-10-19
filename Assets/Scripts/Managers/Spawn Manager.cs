@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
+
+    // I know this is titled 'SpawnManager' but this is the candy's script
+
     private float timeRemaining = 2;
     static private int count = 0;
 
@@ -33,12 +36,25 @@ public class SpawnManager : MonoBehaviour
 
         if (count < 9)
         {
+            this.enabled = true;
 
-        transform.position = new Vector2(Random.Range(-6.0f, 6.0f), 6);
+            transform.position = new Vector2(Random.Range(-6.0f, 6.0f), 6);
 
-        count += 1;
+            count += 1;
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+         if (collision.gameObject.tag == "Ground")
+        {
+            this.enabled = false;
+        }
+
+        if (collision.gameObject.name == "Player")
+        {
+            this.enabled = false;
+        }
+    }
 
 }

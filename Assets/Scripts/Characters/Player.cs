@@ -33,9 +33,9 @@ public class Player : MonoBehaviour
     {
         if (coll.gameObject.name == "Candy")
         {
-            Destroy(coll.gameObject);
 
             points += 1;
+            print(points);
         }
     }
 
